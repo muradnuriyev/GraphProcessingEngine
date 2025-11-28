@@ -1,0 +1,30 @@
+@GraphProcessingEngine.WebApi_HostAddress = http://localhost:5260
+
+### Create a graph
+POST {{GraphProcessingEngine.WebApi_HostAddress}}/graphs
+Content-Type: application/json
+
+{
+  "name": "demo",
+  "isDirected": false
+}
+
+### Add an edge
+POST {{GraphProcessingEngine.WebApi_HostAddress}}/graphs/demo/edges
+Content-Type: application/json
+
+{
+  "sourceId": "A",
+  "targetId": "B",
+  "weight": 1
+}
+
+### Find shortest path
+POST {{GraphProcessingEngine.WebApi_HostAddress}}/graphs/demo/paths/shortest
+Content-Type: application/json
+
+{
+  "startId": "A",
+  "goalId": "B",
+  "algorithm": "dijkstra"
+}

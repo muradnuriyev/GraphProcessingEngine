@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/GraphProcessingEngine.Cli/GraphProcessingEngine.Cli.csproj" />
+    <Project Path="src/GraphProcessingEngine.Core/GraphProcessingEngine.Core.csproj" />
+    <Project Path="src/GraphProcessingEngine.Gui.Wpf/GraphProcessingEngine.Gui.Wpf.csproj" />
+    <Project Path="src/GraphProcessingEngine.WebApi/GraphProcessingEngine.WebApi.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/GraphProcessingEngine.Core.Tests/GraphProcessingEngine.Core.Tests.csproj" />
+  </Folder>
+</Solution>
