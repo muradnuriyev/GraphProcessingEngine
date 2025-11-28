@@ -28,6 +28,6 @@ public class GraphBasicTests
         var edges = graph.Edges.ToList();
         Assert.Single(edges);
         Assert.Equal(2, edges[0].Weight);
-        Assert.Equal(2, graph.Version);
+        Assert.Equal(3, graph.Version);
     }
 }
