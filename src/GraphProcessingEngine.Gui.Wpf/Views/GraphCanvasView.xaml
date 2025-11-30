@@ -7,12 +7,21 @@
                           ShadowDepth="4"
                           BlurRadius="8"
                           Color="#AA000000" />
+        <Style TargetType="Border" x:Key="NodeDragStyle">
+            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="Node_PreviewMouseLeftButtonDown" />
+            <EventSetter Event="PreviewMouseLeftButtonUp" Handler="Node_PreviewMouseLeftButtonUp" />
+            <EventSetter Event="PreviewMouseMove" Handler="Node_PreviewMouseMove" />
+        </Style>
     </UserControl.Resources>
-    <Grid Background="#0B1220">
-        <ItemsControl ItemsSource="{Binding Edges}">
+    <Grid x:Name="CanvasHost"
+          Background="#0B1220"
+          MouseLeftButtonDown="Surface_MouseLeftButtonDown">
+        <ItemsControl ItemsSource="{Binding Edges}"
+                      IsHitTestVisible="False">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas />
+                    <Canvas Width="{Binding ActualWidth, ElementName=CanvasHost}"
+                            Height="{Binding ActualHeight, ElementName=CanvasHost}" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
@@ -25,7 +34,20 @@
                           StrokeThickness="2"
                           StrokeDashCap="Round"
                           StrokeStartLineCap="Round"
-                          StrokeEndLineCap="Round" />
+                          StrokeEndLineCap="Round">
+                        <Line.Style>
+                            <Style TargetType="Line">
+                                <Setter Property="Stroke" Value="#3B82F6" />
+                                <Setter Property="StrokeThickness" Value="2" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsHighlighted}" Value="True">
+                                        <Setter Property="Stroke" Value="#FBBF24" />
+                                        <Setter Property="StrokeThickness" Value="3" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Line.Style>
+                    </Line>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
@@ -33,7 +55,8 @@
         <ItemsControl ItemsSource="{Binding Nodes}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas />
+                    <Canvas Width="{Binding ActualWidth, ElementName=CanvasHost}"
+                            Height="{Binding ActualHeight, ElementName=CanvasHost}" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
@@ -47,6 +70,24 @@
                             Canvas.Left="{Binding X}"
                             Canvas.Top="{Binding Y}"
                             Effect="{DynamicResource DropShadowEffect}">
+                        <Border.Style>
+                            <Style TargetType="Border" BasedOn="{StaticResource NodeDragStyle}">
+                                <Setter Property="Background" Value="#1D4ED8" />
+                                <Setter Property="BorderBrush" Value="#60A5FA" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                        <Setter Property="Background" Value="#2563EB" />
+                                        <Setter Property="BorderBrush" Value="#FBBF24" />
+                                        <Setter Property="BorderThickness" Value="3" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsHighlighted}" Value="True">
+                                        <Setter Property="Background" Value="#FBBF24" />
+                                        <Setter Property="BorderBrush" Value="#F59E0B" />
+                                        <Setter Property="BorderThickness" Value="3" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
                         <TextBlock Text="{Binding Id}"
                                    Foreground="White"
                                    FontWeight="Bold"

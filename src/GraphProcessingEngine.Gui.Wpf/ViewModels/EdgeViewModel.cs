@@ -32,6 +32,13 @@ public sealed class EdgeViewModel : INotifyPropertyChanged
 
     public double Y2 => Target.Y;
 
+    private bool _isHighlighted;
+    public bool IsHighlighted
+    {
+        get => _isHighlighted;
+        set => SetProperty(ref _isHighlighted, value);
+    }
+
     public event PropertyChangedEventHandler? PropertyChanged;
 
     private void OnNodeChanged(object? sender, PropertyChangedEventArgs e)
@@ -53,5 +60,14 @@ public sealed class EdgeViewModel : INotifyPropertyChanged
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    private void SetProperty<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+    {
+        if (!Equals(field, value))
+        {
+            field = value;
+            OnPropertyChanged(propertyName);
+        }
     }
 }

@@ -4,7 +4,7 @@ namespace GraphProcessingEngine.Gui.Wpf.Services;
 
 public sealed class GraphLayoutService
 {
-    public void ApplyCircularLayout(GraphViewModel viewModel, double radius = 150, double centerX = 260, double centerY = 200)
+    public void ApplyCircularLayout(GraphViewModel viewModel, double radius = 220, double centerX = 480, double centerY = 320)
     {
         ArgumentNullException.ThrowIfNull(viewModel);
         if (viewModel.Nodes.Count == 0)

@@ -13,6 +13,38 @@ public partial class MainWindow : Window
         DataContext = BuildDemoViewModel();
     }
 
+    private MainViewModel ViewModel => (MainViewModel)DataContext;
+
+    private void ConnectSelected_Click(object sender, RoutedEventArgs e)
+    {
+        ViewModel.ConnectSelected();
+    }
+
+    private void ShortestPath_Click(object sender, RoutedEventArgs e)
+    {
+        ViewModel.RunShortestPath();
+    }
+
+    private void Traverse_Click(object sender, RoutedEventArgs e)
+    {
+        ViewModel.Traverse();
+    }
+
+    private void ClearHighlights_Click(object sender, RoutedEventArgs e)
+    {
+        ViewModel.ClearHighlights();
+    }
+
+    private void DeleteSelected_Click(object sender, RoutedEventArgs e)
+    {
+        ViewModel.DeleteSelected();
+    }
+
+    private void ClearGraph_Click(object sender, RoutedEventArgs e)
+    {
+        ViewModel.ClearGraph();
+    }
+
     private static MainViewModel BuildDemoViewModel()
     {
         var graph = new GraphBuilder()
